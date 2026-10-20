@@ -12,6 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="ambient" aria-hidden="true">
+        <div class="ambient-mesh"></div>
+        <div class="ambient-glow" id="ambientGlow"></div>
+    </div>
+
     <a class="skip-link" href="#main">İçeriğe atla</a>
 
     <header class="site-header" id="siteHeader">
@@ -39,26 +44,26 @@
         <section class="hero" id="home">
             <div class="hero-grid shell">
                 <div class="hero-copy">
-                    <p class="eyebrow" data-reveal>Front-End Developer</p>
-                    <h1 class="hero-title" data-reveal>
-                        <span class="hero-title-main">Merhaba, ben Ekrem.</span>
-                        <span class="hero-title-sub">Kullanıcı dostu, hızlı ve modern arayüzler geliştiriyorum.</span>
+                    <p class="eyebrow hero-fade">Front-End Developer</p>
+                    <h1 class="hero-title">
+                        <span class="hero-title-main" data-split-hero>Merhaba, ben Ekrem.</span>
+                        <span class="hero-title-sub hero-line">Kullanıcı dostu, hızlı ve modern arayüzler geliştiriyorum.</span>
                     </h1>
-                    <div class="hero-actions" data-reveal>
+                    <div class="hero-actions hero-fade">
                         <a class="btn btn-fill" href="#contact">İletişim</a>
                         <a class="btn btn-ghost" href="https://github.com/EkremTezcanSaridag" target="_blank" rel="noopener noreferrer">GitHub profili</a>
                     </div>
                 </div>
-                <aside class="hero-panel" data-reveal aria-label="Özet bilgiler">
-                    <div class="panel-card">
+                <aside class="hero-panel" aria-label="Özet bilgiler">
+                    <div class="panel-card hero-fade">
                         <span class="panel-label">Konum</span>
                         <p>Eskişehir / Niğde</p>
                     </div>
-                    <div class="panel-card">
+                    <div class="panel-card hero-fade">
                         <span class="panel-label">GANO</span>
                         <p>3,43 / 4,00</p>
                     </div>
-                    <div class="panel-card panel-card--wide">
+                    <div class="panel-card panel-card--wide hero-fade">
                         <span class="panel-label">Odak</span>
                         <p>Angular · TypeScript · React Native · AI destekli geliştirme</p>
                     </div>
@@ -67,7 +72,7 @@
             <div class="hero-line" aria-hidden="true"></div>
         </section>
 
-        <section class="section" id="about">
+        <section class="section reveal-section" id="about">
             <div class="shell section-split">
                 <div class="section-head" data-reveal>
                     <h2>Hakkımda</h2>
@@ -87,7 +92,7 @@
             </div>
         </section>
 
-        <section class="section section--muted" id="education">
+        <section class="section section--muted reveal-section" id="education">
             <div class="shell">
                 <div class="section-head section-head--center" data-reveal>
                     <p class="section-kicker">Eğitim</p>
@@ -125,7 +130,7 @@
             </div>
         </section>
 
-        <section class="section" id="experience">
+        <section class="section reveal-section" id="experience">
             <div class="shell">
                 <div class="section-head" data-reveal>
                     <p class="section-kicker">Deneyim</p>
@@ -156,7 +161,7 @@
             </div>
         </section>
 
-        <section class="section section--muted" id="skills">
+        <section class="section section--muted reveal-section" id="skills">
             <div class="shell">
                 <div class="section-head section-head--center" data-reveal>
                     <p class="section-kicker">Yetkinlikler</p>
@@ -224,24 +229,24 @@
             </div>
         </section>
 
-        <section class="section" id="github">
+        <section class="section reveal-section" id="github">
             <div class="shell section-split">
                 <div class="section-head" data-reveal>
                     <p class="section-kicker">GitHub</p>
                     <h2>Kod depoları</h2>
                 </div>
-                <div class="repo-list" data-reveal>
-                    <a class="repo-row" href="https://github.com/EkremTezcanSaridag" target="_blank" rel="noopener noreferrer">
+                <div class="repo-list">
+                    <a class="repo-row" data-reveal href="https://github.com/EkremTezcanSaridag" target="_blank" rel="noopener noreferrer">
                         <span class="repo-name">@EkremTezcanSaridag</span>
                         <span class="repo-desc">Profil ve tüm depolar</span>
                         <span class="repo-arrow" aria-hidden="true">→</span>
                     </a>
-                    <a class="repo-row" href="https://github.com/EkremTezcanSaridag/YakitRadar" target="_blank" rel="noopener noreferrer">
+                    <a class="repo-row" data-reveal href="https://github.com/EkremTezcanSaridag/YakitRadar" target="_blank" rel="noopener noreferrer">
                         <span class="repo-name">YakitRadar</span>
                         <span class="repo-desc">AI destekli akaryakıt fiyat ve piyasa takibi (React Native, Gemini, Supabase)</span>
                         <span class="repo-arrow" aria-hidden="true">→</span>
                     </a>
-                    <a class="repo-row" href="https://github.com/EkremTezcanSaridag/dijital-arsiv" target="_blank" rel="noopener noreferrer">
+                    <a class="repo-row" data-reveal href="https://github.com/EkremTezcanSaridag/dijital-arsiv" target="_blank" rel="noopener noreferrer">
                         <span class="repo-name">dijital-arsiv</span>
                         <span class="repo-desc">Groq Vision AI ile akıllı belge yönetimi</span>
                         <span class="repo-arrow" aria-hidden="true">→</span>
@@ -250,7 +255,7 @@
             </div>
         </section>
 
-        <section class="section section--contact" id="contact">
+        <section class="section section--contact reveal-section" id="contact">
             <div class="shell">
                 <div class="contact-wrap" data-reveal>
                     <p class="section-kicker">İletişim</p>
