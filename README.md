@@ -67,10 +67,10 @@ npx http-server
 
 Bu proje, GitHub Actions ile otomatik deployment için yapılandırılmıştır.
 
-1. **GitHub Repository Ayarları:**
-   - GitHub repository'nizin "Settings" bölümüne gidin
-   - Sol menüden "Pages" seçeneğini seçin
-   - "Source" kısmında "GitHub Actions" seçeneğini seçin
+1. **GitHub Repository Ayarları (repo sahibi bir kez yapmalı):**
+   - Repository **Settings → Pages**
+   - **Build and deployment → Source:** **GitHub Actions**
+   - Cloud agent / `gh` token ile bu adım otomatik açılamazsa (403), ayarı repo sahibi elle yapar; ardından `main` push veya Actions’tan **Deploy to GitHub Pages** workflow’unu çalıştırın
 
 2. **Deploy:**
    - `main` branch'ine push yaptığınızda otomatik olarak deploy edilir
