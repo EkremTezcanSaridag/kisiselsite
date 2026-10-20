@@ -17,7 +17,7 @@ Bu proje, Ekrem Tezcan Sarıdağ için AI destekli yazılım geliştirme kursu k
 2. **Hakkımda**: Özet bilgi ve istatistikler
 3. **Eğitim**: Timeline formatında eğitim geçmişi
 4. **Deneyim**: BAUM staj deneyimi detayları
-5. **Projeler**: Kart formatında 3 önemli proje (Anista, YakitRadar, Dijital Arşiv)
+5. **GitHub**: Depo bağlantıları (profil, YakitRadar, dijital-arsiv)
 6. **Yetenekler**: Kategorize edilmiş teknik beceriler ve sertifikalar
 7. **İletişim**: İletişim bilgileri ve sosyal medya linkleri
 
@@ -131,7 +131,7 @@ portfolio/
 `index.html` dosyasını düzenleyerek içeriği güncelleyebilirsiniz:
 - Kişisel bilgiler
 - Eğitim geçmişi
-- Projeler
+- GitHub depoları
 - Yetenekler
 - İletişim bilgileri
 
