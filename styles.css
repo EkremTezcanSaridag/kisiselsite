@@ -199,14 +199,7 @@ body {
     color: var(--accent);
     letter-spacing: -0.01em;
     max-width: 22ch;
-}
-
-.hero-lead {
-    max-width: 28ch;
-    font-size: 1.125rem;
-    color: var(--text-soft);
-    margin: 0 0 2.25rem;
-    line-height: 1.55;
+    margin-bottom: 0.25rem;
 }
 
 .hero-actions {
