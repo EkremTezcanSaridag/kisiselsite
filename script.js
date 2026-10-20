@@ -1,10 +1,12 @@
 const header = document.getElementById('siteHeader');
 const navToggle = document.getElementById('navToggle');
 const siteNav = document.getElementById('siteNav');
-const ambientGlow = document.getElementById('ambientGlow');
 const hero = document.querySelector('.hero');
+const decryptEl = document.getElementById('decryptTarget');
+const matrixCanvas = document.getElementById('matrixRain');
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const MATRIX_CHARS = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ0123456789ABCDEF';
 
 function setNavOpen(open) {
     siteNav.classList.toggle('is-open', open);
@@ -33,73 +35,118 @@ window.addEventListener(
     { passive: true }
 );
 
-function splitHeroTitle() {
-    const target = document.querySelector('[data-split-hero]');
-    if (!target || target.dataset.splitDone) return;
+function runDecryptEffect() {
+    if (!decryptEl) return;
 
-    const text = target.textContent;
-    target.textContent = '';
-    target.setAttribute('aria-label', text);
-
-    [...text].forEach((char, index) => {
-        const span = document.createElement('span');
-        span.className = 'hero-char';
-        span.style.setProperty('--char-i', String(index));
-        span.textContent = char === ' ' ? '\u00a0' : char;
-        span.setAttribute('aria-hidden', 'true');
-        target.appendChild(span);
-    });
-
-    target.dataset.splitDone = 'true';
-}
-
-function runHeroEntrance() {
-    if (!hero) return;
-
+    const finalText = decryptEl.dataset.decrypt || decryptEl.textContent;
     if (prefersReducedMotion) {
-        hero.classList.add('is-entered');
+        decryptEl.textContent = finalText;
+        hero?.classList.add('is-ready');
         return;
     }
 
-    splitHeroTitle();
+    const pool = MATRIX_CHARS;
+    const length = finalText.length;
+    let frame = 0;
+    const totalFrames = 42;
 
-    requestAnimationFrame(() => {
-        hero.classList.add('is-entered');
-    });
+    const tick = () => {
+        frame += 1;
+        const progress = frame / totalFrames;
+        const resolved = Math.floor(progress * length);
+
+        let out = '';
+        for (let i = 0; i < length; i += 1) {
+            if (finalText[i] === ' ') {
+                out += ' ';
+                continue;
+            }
+            if (i < resolved) {
+                out += finalText[i];
+            } else {
+                out += pool[Math.floor(Math.random() * pool.length)];
+            }
+        }
+        decryptEl.textContent = out;
+
+        if (frame < totalFrames) {
+            requestAnimationFrame(tick);
+        } else {
+            decryptEl.textContent = finalText;
+            hero?.classList.add('is-ready');
+        }
+    };
+
+    requestAnimationFrame(tick);
 }
 
-function initAmbientGlow() {
-    if (!ambientGlow || prefersReducedMotion) return;
+function initMatrixRain() {
+    if (!matrixCanvas || prefersReducedMotion) return;
 
-    let mx = 0.5;
-    let my = 0.35;
-    let tx = mx;
-    let ty = my;
-    let rafId = null;
+    const ctx = matrixCanvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
 
-    const paint = () => {
-        mx += (tx - mx) * 0.08;
-        my += (ty - my) * 0.08;
-        ambientGlow.style.setProperty('--mx', `${mx * 100}%`);
-        ambientGlow.style.setProperty('--my', `${my * 100}%`);
-        rafId = requestAnimationFrame(paint);
+    let width = 0;
+    let height = 0;
+    let columns = 0;
+    let drops = [];
+    let fontSize = 14;
+    let animationId = null;
+    let running = true;
+
+    const resize = () => {
+        width = matrixCanvas.width = window.innerWidth;
+        height = matrixCanvas.height = window.innerHeight;
+        columns = Math.floor(width / fontSize);
+        drops = new Array(columns).fill(0).map(() => Math.random() * -50);
     };
 
-    const onMove = (e) => {
-        tx = e.clientX / window.innerWidth;
-        ty = e.clientY / window.innerHeight;
-        if (!rafId) rafId = requestAnimationFrame(paint);
+    const draw = () => {
+        if (!running) return;
+
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.fillStyle = '#00ff41';
+        ctx.font = `${fontSize}px "JetBrains Mono", monospace`;
+
+        for (let i = 0; i < columns; i += 1) {
+            const char = MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)];
+            const x = i * fontSize;
+            const y = drops[i] * fontSize;
+
+            ctx.fillStyle = `rgba(0, 255, 65, ${0.35 + Math.random() * 0.45})`;
+            ctx.fillText(char, x, y);
+
+            if (y > height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i] += 0.55 + Math.random() * 0.35;
+        }
+
+        animationId = requestAnimationFrame(draw);
     };
 
-    window.addEventListener('pointermove', onMove, { passive: true });
+    resize();
+    draw();
 
-    paint();
+    window.addEventListener('resize', resize, { passive: true });
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            running = false;
+            if (animationId) cancelAnimationFrame(animationId);
+        } else if (!running) {
+            running = true;
+            draw();
+        }
+    });
 }
 
 function revealSection(section) {
     const items = section.querySelectorAll('[data-reveal]');
     items.forEach((el, i) => {
-        el.style.setProperty('--reveal-delay', `${i * 90}ms`);
+        el.style.setProperty('--reveal-delay', `${i * 85}ms`);
         el.classList.add('is-visible');
     });
 }
@@ -155,5 +202,5 @@ window.addEventListener(
 );
 
 updateActiveNav();
-runHeroEntrance();
-initAmbientGlow();
+initMatrixRain();
+runDecryptEffect();
