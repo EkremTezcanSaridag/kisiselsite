@@ -179,16 +179,26 @@ body {
 
 .hero-title {
     font-family: var(--font-display);
-    font-size: clamp(2.35rem, 5.5vw, 3.75rem);
     font-weight: 700;
-    line-height: 1.08;
+    line-height: 1.12;
     letter-spacing: -0.03em;
     margin: 0 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
 }
 
-.hero-title em {
-    font-style: normal;
+.hero-title-main {
+    font-size: clamp(2.35rem, 5.5vw, 3.75rem);
+}
+
+.hero-title-sub {
+    font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+    font-weight: 500;
+    line-height: 1.35;
     color: var(--accent);
+    letter-spacing: -0.01em;
+    max-width: 22ch;
 }
 
 .hero-lead {
